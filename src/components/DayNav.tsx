@@ -1,4 +1,4 @@
-import { useEffect, useRef, type KeyboardEvent } from 'react'
+import { useEffect, useRef, type CSSProperties, type KeyboardEvent } from 'react'
 import type { DayId, LocaleCode } from '../data/types.ts'
 import { DAY_META, DAY_ORDER } from '../data/taxonomy.ts'
 import { ui } from '../i18n/strings.ts'
@@ -52,6 +52,7 @@ export function DayNav({ active, locale, stats, onSelect }: DayNavProps) {
           const selected = day === active
           const stat = stats[day]
           const complete = stat.total > 0 && stat.done === stat.total
+          const ratio = stat.total === 0 ? 0 : stat.done / stat.total
 
           return (
             <button
@@ -72,8 +73,10 @@ export function DayNav({ active, locale, stats, onSelect }: DayNavProps) {
                 else buttons.current.delete(day)
               }}
             >
-              <span className="dayitem__face" aria-hidden="true">
-                {DAY_META[day].mini[locale]}
+              <span className="dayitem__ring" style={{ '--p': ratio } as CSSProperties}>
+                <span className="dayitem__face" aria-hidden="true">
+                  {DAY_META[day].mini[locale]}
+                </span>
               </span>
               <span className="dayitem__name" aria-hidden="true">
                 {DAY_META[day].label[locale]}

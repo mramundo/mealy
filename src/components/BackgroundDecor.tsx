@@ -42,15 +42,11 @@ const COLORS: Record<ProduceName, string> = {
 
 const NAMES = Object.keys(COLORS) as ProduceName[]
 
-/** Widest cell the grid aims for; narrow viewports get proportionally smaller
-    ones so a phone still shows a full field rather than a handful of shapes. */
-const MAX_CELL = 170
-const MIN_CELL = 112
-/** Share of the cell a drawing may occupy. */
-const FILL = 0.62
-/** Widest tilt, in degrees. A square grows by |cos|+|sin| when rotated. */
-const TILT = 8
+/** Widest tilt, in degrees. A square grows by |cos| + |sin| when rotated. */
+const TILT = 10
 const TILT_GROWTH = Math.cos((TILT * Math.PI) / 180) + Math.sin((TILT * Math.PI) / 180)
+/** Passes from the largest drawing down to the smallest. */
+const PASSES = 8
 
 interface Cell {
   name: ProduceName
@@ -58,48 +54,82 @@ interface Cell {
   style: CSSProperties
 }
 
-/** Deterministic 0-1 noise: the same viewport always lays out the same way. */
-function noise(index: number, salt: number): number {
-  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453
-  return value - Math.floor(value)
+interface Placed {
+  x: number
+  y: number
+  size: number
+  /** Half-width of the drawing's box once tilted. */
+  half: number
+}
+
+/** Small deterministic PRNG: the same viewport always lays out the same way. */
+function mulberry32(seed: number): () => number {
+  let state = seed >>> 0
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0
+    let t = Math.imul(state ^ (state >>> 15), 1 | state)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
 }
 
 /**
- * One drawing per grid cell, jittered only as far as the cell allows once its
- * tilt is accounted for — so no two drawings can ever touch, whatever the
- * viewport. Nothing here animates: the field is laid out once and stays put.
+ * Scattered rather than gridded: candidates are thrown at random and kept only
+ * when their tilted box clears every drawing already down by at least `gap`, so
+ * two of them can never touch. Six passes run from the largest size to the
+ * smallest, which lets the late, small ones settle into the holes the early,
+ * big ones left — an uneven field with no bald patches.
+ *
+ * Nothing here animates: the field is laid out once and stays put.
  */
 function layout(width: number, height: number): Cell[] {
-  const cell = Math.max(MIN_CELL, Math.min(MAX_CELL, width / 3))
-  const columns = Math.max(2, Math.round(width / cell))
-  const rows = Math.max(3, Math.round(height / cell))
-  const cellWidth = width / columns
-  const cellHeight = height / rows
+  const random = mulberry32(0x9e3779b9)
 
-  const size = Math.round(Math.min(cellWidth, cellHeight) * FILL)
-  // Half the room left over once the tilted drawing is placed in the middle.
-  const slackX = Math.max(0, (cellWidth - size * TILT_GROWTH) / 2)
-  const slackY = Math.max(0, (cellHeight - size * TILT_GROWTH) / 2)
+  const largest = Math.max(72, Math.min(132, Math.min(width, height) / 7))
+  const smallest = largest * 0.42
+  const gap = Math.max(8, largest * 0.09)
+  // Let the field run past the edges so it reads as continuing off-screen.
+  const bleed = 0.05
 
-  return Array.from({ length: columns * rows }, (_, index): Cell => {
-    const column = index % columns
-    const row = Math.floor(index / columns)
-    const spread = (salt: number) => noise(index, salt) * 2 - 1
+  const placed: Placed[] = []
 
+  for (let pass = 0; pass < PASSES; pass++) {
+    const size = largest - ((largest - smallest) * pass) / (PASSES - 1)
+    const half = (size * TILT_GROWTH) / 2
+    const attempts = 600 + pass * 320
+
+    for (let attempt = 0; attempt < attempts; attempt++) {
+      const x = (random() * (1 + 2 * bleed) - bleed) * width
+      const y = (random() * (1 + 2 * bleed) - bleed) * height
+
+      let free = true
+      for (const other of placed) {
+        const reach = half + other.half + gap
+        if (Math.abs(x - other.x) < reach && Math.abs(y - other.y) < reach) {
+          free = false
+          break
+        }
+      }
+
+      if (free) placed.push({ x, y, size, half })
+    }
+  }
+
+  return placed.map((spot, index): Cell => {
     // 7 and 26 are coprime, so the drawings cycle through the whole set before
-    // repeating and no two neighbouring cells show the same thing.
+    // any of them comes back around.
     const name = NAMES[(index * 7) % NAMES.length] ?? 'tomato'
 
     return {
       name,
       color: COLORS[name],
       style: {
-        width: size,
-        height: size,
-        left: Math.round((column + 0.5) * cellWidth + spread(1) * slackX - size / 2),
-        top: Math.round((row + 0.5) * cellHeight + spread(2) * slackY - size / 2),
-        rotate: `${(spread(3) * TILT).toFixed(1)}deg`,
-        opacity: Number((0.115 + noise(index, 4) * 0.055).toFixed(3)),
+        width: Math.round(spot.size),
+        height: Math.round(spot.size),
+        left: Math.round(spot.x - spot.size / 2),
+        top: Math.round(spot.y - spot.size / 2),
+        rotate: `${((random() * 2 - 1) * TILT).toFixed(1)}deg`,
+        opacity: Number((0.105 + random() * 0.06).toFixed(3)),
       },
     }
   })

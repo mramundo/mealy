@@ -284,8 +284,11 @@ a {
   padding: 0.4rem 0.55rem;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
+  /* Content scrolls under this one, so it needs more than a card's veil. The
+     blur is small on purpose: enough to break up body text passing beneath,
+     too little to soften the large drawings further back. */
   background: var(--surface-strong);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(4px);
   box-shadow: var(--shadow-raised);
 }
 
@@ -315,39 +318,57 @@ a {
   min-width: 0;
 }
 
-/* Same treatment as a card: a hairline on a translucent fill, so the drawings
-   behind it stay visible. */
+/* The progress ring is masked down to an annulus, so the middle of the circle
+   stays clear and the drawings behind it show through. */
+.dayitem__ring {
+  --p: 0;
+  --track: 3.5px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+}
+
+.dayitem__ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--go) calc(var(--p) * 360deg),
+    color-mix(in srgb, var(--ink) 13%, transparent) 0
+  );
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
+  mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
+  transition: background 0.4s var(--ease-out);
+}
+
 .dayitem__face {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--hairline);
+  width: 31px;
+  height: 31px;
   border-radius: 50%;
-  background: var(--surface);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   letter-spacing: 0.01em;
   color: var(--ink-3);
   transition:
     background 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out),
     color 0.2s var(--ease-out);
 }
 
 .dayitem[data-complete='true'] .dayitem__face {
-  border-color: color-mix(in srgb, var(--go) 45%, transparent);
   color: var(--go);
 }
 
 .dayitem:hover .dayitem__face {
-  border-color: var(--hairline-strong);
   color: var(--ink);
 }
 
 .dayitem[aria-selected='true'] .dayitem__face {
-  border-color: var(--ink);
   background: var(--ink);
   color: #fff;
 }
@@ -401,17 +422,22 @@ a {
   }
 
   .dayitem:hover {
-    background: var(--surface);
-  }
-
-  .dayitem[aria-selected='true'] {
-    background: var(--surface);
     box-shadow: inset 0 0 0 1px var(--hairline);
   }
 
+  .dayitem[aria-selected='true'] {
+    box-shadow: inset 0 0 0 1.5px var(--hairline-strong);
+  }
+
+  .dayitem__ring {
+    --track: 2.5px;
+    width: 26px;
+    height: 26px;
+  }
+
   .dayitem__face {
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
     font-size: 0.6rem;
   }
 
