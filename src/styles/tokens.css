@@ -1,0 +1,75 @@
+/* ------------------------------------------------------------------
+   Design tokens — a warm paper ground with five loud "food" accents.
+   Every meal slot owns one accent; the slot is set on an ancestor with
+   `data-slot`, so cards, chips and icons all read from --slot.
+   ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+
+  /* Paper & ink */
+  --cream: #fff9f0;
+  --cream-deep: #fdf0dd;
+  --paper: #ffffff;
+  --ink: #241f1a;
+  --ink-soft: #6b6055;
+  --ink-faint: #9a8d7e;
+  --line: #e7dbc7;
+
+  /* Produce palette — also used by the drifting background shapes */
+  --amber: #f5a623;
+  --basil: #57a639;
+  --tomato: #e8412f;
+  --berry: #d62b7f;
+  --aubergine: #6246c8;
+  --carrot: #ff8a3d;
+  --lemon: #ffd23f;
+  --teal: #0fa39a;
+  --radish: #ff5d8f;
+
+  /* Type */
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans:
+    'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Rhythm */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --shell: 1180px;
+
+  /* The signature offset shadow */
+  --pop: 5px 6px 0;
+  --pop-lg: 8px 9px 0;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.52, 1);
+}
+
+[data-slot='breakfast'] {
+  --slot: var(--amber);
+  --slot-ink: #8a4b00;
+  --slot-tint: #fff1d9;
+}
+[data-slot='morningSnack'] {
+  --slot: var(--basil);
+  --slot-ink: #2f5f1d;
+  --slot-tint: #e9f6dd;
+}
+[data-slot='lunch'] {
+  --slot: var(--tomato);
+  --slot-ink: #8e1b10;
+  --slot-tint: #ffe5df;
+}
+[data-slot='afternoonSnack'] {
+  --slot: var(--berry);
+  --slot-ink: #7e1049;
+  --slot-tint: #ffe2ef;
+}
+[data-slot='dinner'] {
+  --slot: var(--aubergine);
+  --slot-ink: #38257f;
+  --slot-tint: #eae4ff;
+}

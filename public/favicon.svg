@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mealy">
+  <rect width="64" height="64" rx="15" fill="#FFF9F0"/>
+  <g fill="none" stroke-width="13" transform="rotate(-90 32 32)">
+    <circle cx="32" cy="32" r="18" stroke="#F5A623" stroke-dasharray="22.62 90.48" stroke-dashoffset="0"/>
+    <circle cx="32" cy="32" r="18" stroke="#57A639" stroke-dasharray="22.62 90.48" stroke-dashoffset="-22.62"/>
+    <circle cx="32" cy="32" r="18" stroke="#E8412F" stroke-dasharray="22.62 90.48" stroke-dashoffset="-45.24"/>
+    <circle cx="32" cy="32" r="18" stroke="#D62B7F" stroke-dasharray="22.62 90.48" stroke-dashoffset="-67.86"/>
+    <circle cx="32" cy="32" r="18" stroke="#6246C8" stroke-dasharray="22.62 90.48" stroke-dashoffset="-90.48"/>
+  </g>
+  <g fill="none" stroke="#241F1A" stroke-width="2.6">
+    <circle cx="32" cy="32" r="24.5"/>
+    <circle cx="32" cy="32" r="11.5"/>
+  </g>
+</svg>
