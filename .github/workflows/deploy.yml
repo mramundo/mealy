@@ -1,7 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Switched to `push` once the repository is public and Pages is enabled.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
