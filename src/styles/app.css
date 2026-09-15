@@ -116,12 +116,24 @@ a {
   contain: strict;
 }
 
-.decor__shape {
+.decor__layer {
   position: absolute;
-  opacity: 0.05;
   will-change: transform;
-  animation: drift var(--dur, 34s) ease-in-out infinite alternate;
+  transform: translate3d(0, calc(var(--sy, 0px) * var(--depth, 0) * -1), 0);
+}
+
+.decor__shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: var(--op, 0.1);
+  will-change: transform;
+  animation: var(--anim, drift) var(--dur, 34s) ease-in-out infinite alternate;
   animation-delay: var(--delay, 0s);
+}
+
+.decor__shape svg {
+  display: block;
 }
 
 @keyframes drift {
@@ -129,7 +141,19 @@ a {
     transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));
   }
   to {
-    transform: translate3d(var(--dx, 30px), var(--dy, -40px), 0) rotate(var(--rot2, 14deg));
+    transform: translate3d(var(--dx, 20px), var(--dy, -26px), 0) rotate(var(--rot2, 10deg));
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
+  }
+  50% {
+    transform: translate3d(var(--dx, 20px), 0, 0) rotate(0deg) scale(1.07);
+  }
+  100% {
+    transform: translate3d(0, var(--dy, -26px), 0) rotate(var(--rot2, 10deg)) scale(1);
   }
 }
 
@@ -338,13 +362,12 @@ a {
   color: var(--ink-3);
   transition:
     background 0.2s var(--ease-out),
-    color 0.2s var(--ease-out),
-    scale 0.25s var(--ease-spring);
+    color 0.2s var(--ease-out);
 }
 
 .dayitem:hover .dayitem__face {
   color: var(--ink);
-  scale: 1.06;
+  background: var(--surface-sunken);
 }
 
 .dayitem[aria-selected='true'] .dayitem__face {
@@ -457,11 +480,23 @@ a {
   letter-spacing: -0.04em;
 }
 
-.dayhead__swash {
-  display: block;
-  width: min(220px, 60%);
-  height: 10px;
-  margin-top: 0.35rem;
+.daymeter {
+  display: flex;
+  gap: 4px;
+  width: min(250px, 72%);
+  margin-top: 0.7rem;
+}
+
+.daymeter i {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--slot) 20%, var(--hairline));
+  transition: background 0.35s var(--ease-out);
+}
+
+.daymeter i[data-done='true'] {
+  background: var(--slot);
 }
 
 .dayhead__meta {
@@ -471,23 +506,6 @@ a {
   margin-top: 0.75rem;
   font-size: 0.88rem;
   color: var(--ink-2);
-}
-
-.dayhead__dots {
-  display: inline-flex;
-  gap: 4px;
-}
-
-.dayhead__dots i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--hairline-strong);
-  transition: background 0.3s var(--ease-out);
-}
-
-.dayhead__dots i[data-done='true'] {
-  background: var(--go);
 }
 
 .dayhead__nav {
@@ -570,16 +588,11 @@ a {
   background: var(--slot);
   color: #fff;
   box-shadow: 0 0 0 4px var(--bg);
-  transition: scale 0.25s var(--ease-spring);
 }
 
 .meal__dot svg {
   width: 1.25rem;
   height: 1.25rem;
-}
-
-.meal:hover .meal__dot {
-  scale: 1.07;
 }
 
 .card {
@@ -669,8 +682,14 @@ a {
   padding-right: 0.35rem;
 }
 
+.check:hover {
+  border-color: color-mix(in srgb, var(--go) 55%, var(--hairline-strong));
+  background: var(--go-soft);
+}
+
 .check:hover .check__box {
   border-color: var(--go);
+  color: color-mix(in srgb, var(--go) 45%, transparent);
 }
 
 .check[aria-checked='true'] {

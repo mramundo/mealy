@@ -4,7 +4,6 @@ import { DayNav, type DayStat } from './components/DayNav.tsx'
 import { Footer } from './components/Footer.tsx'
 import { MealBlock } from './components/MealBlock.tsx'
 import { TopBar } from './components/TopBar.tsx'
-import { Swash } from './components/brand.tsx'
 import { ChevronIcon } from './components/icons.tsx'
 import { plan } from './data/plan.ts'
 import { DAY_META, DAY_ORDER, SLOT_ORDER, currentDayId } from './data/taxonomy.ts'
@@ -139,13 +138,16 @@ export default function App() {
             <header className="dayhead">
               <div>
                 <h2 className="dayhead__title">{DAY_META[activeDay].label[locale]}</h2>
-                <Swash />
+                <span className="daymeter" aria-hidden="true">
+                  {plannedSlots.map((slot) => (
+                    <i
+                      key={slot}
+                      data-slot={slot}
+                      data-done={String(Boolean(checks[mealKey(activeDay, slot)]))}
+                    />
+                  ))}
+                </span>
                 <p className="dayhead__meta">
-                  <span className="dayhead__dots" aria-hidden="true">
-                    {plannedSlots.map((slot) => (
-                      <i key={slot} data-done={String(Boolean(checks[mealKey(activeDay, slot)]))} />
-                    ))}
-                  </span>
                   {mealCount(doneCount, plannedSlots.length, locale)}
                   {doneCount > 0 && (
                     <>

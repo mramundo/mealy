@@ -25,34 +25,3 @@ export function BrandMark() {
     </svg>
   )
 }
-
-/** Hand-drawn underline for the day title. */
-export function Swash() {
-  return (
-    <svg
-      className="dayhead__swash"
-      viewBox="0 0 220 10"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="mealy-swash" x1="0" y1="0" x2="1" y2="0">
-          {ACCENTS.map((colour, index) => (
-            <stop
-              key={colour}
-              offset={`${(index / (ACCENTS.length - 1)) * 100}%`}
-              stopColor={colour}
-            />
-          ))}
-        </linearGradient>
-      </defs>
-      <path
-        d="M3 7C21 1.8 39 1.8 57 7s36 5.2 54 0 36-5.2 54 0 36 5.2 52 0"
-        fill="none"
-        stroke="url(#mealy-swash)"
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
