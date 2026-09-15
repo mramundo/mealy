@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mealy">
-  <g fill="none" stroke-width="12.5" transform="rotate(-90 32 32)">
-    <circle cx="32" cy="32" r="21.5" stroke="#f59300" stroke-dasharray="24.22 110.87" stroke-dashoffset="0"/>
-    <circle cx="32" cy="32" r="21.5" stroke="#17a94b" stroke-dasharray="24.22 110.87" stroke-dashoffset="-27.02"/>
-    <circle cx="32" cy="32" r="21.5" stroke="#e8412e" stroke-dasharray="24.22 110.87" stroke-dashoffset="-54.04"/>
-    <circle cx="32" cy="32" r="21.5" stroke="#de2a7e" stroke-dasharray="24.22 110.87" stroke-dashoffset="-81.05"/>
-    <circle cx="32" cy="32" r="21.5" stroke="#6b4ae3" stroke-dasharray="24.22 110.87" stroke-dashoffset="-108.07"/>
+  <g fill="none" stroke-width="12.5">
+    <rect x="8" y="8" width="48" height="48" stroke="#f59300" stroke-dasharray="35.2 156.8" stroke-dashoffset="0"/>
+    <rect x="8" y="8" width="48" height="48" stroke="#17a94b" stroke-dasharray="35.2 156.8" stroke-dashoffset="-38.4"/>
+    <rect x="8" y="8" width="48" height="48" stroke="#e8412e" stroke-dasharray="35.2 156.8" stroke-dashoffset="-76.8"/>
+    <rect x="8" y="8" width="48" height="48" stroke="#de2a7e" stroke-dasharray="35.2 156.8" stroke-dashoffset="-115.2"/>
+    <rect x="8" y="8" width="48" height="48" stroke="#6b4ae3" stroke-dasharray="35.2 156.8" stroke-dashoffset="-153.6"/>
   </g>
 </svg>

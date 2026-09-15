@@ -65,7 +65,7 @@ a {
 :focus-visible {
   outline: 2.5px solid var(--ink);
   outline-offset: 3px;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 .sr-only {
@@ -320,13 +320,19 @@ a {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 50%;
   background: conic-gradient(
     var(--go) calc(var(--p) * 360deg),
     color-mix(in srgb, var(--ink) 13%, var(--bg)) 0
   );
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
-  mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
+  padding: var(--track);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
   transition: background 0.4s var(--ease-out);
 }
 
@@ -335,7 +341,6 @@ a {
   place-items: center;
   width: 31px;
   height: 31px;
-  border-radius: 50%;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.74rem;
@@ -505,7 +510,6 @@ a {
   place-items: center;
   width: 2.3rem;
   height: 2.3rem;
-  border-radius: 50%;
   border: 1px solid var(--hairline-strong);
   background: var(--surface);
   color: var(--ink-2);
@@ -557,7 +561,6 @@ a {
   top: 42px;
   bottom: -2px;
   width: 2px;
-  border-radius: 2px;
   background: color-mix(in srgb, var(--slot) 34%, var(--bg));
 }
 
@@ -570,7 +573,6 @@ a {
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   background: var(--slot);
   color: #fff;
   box-shadow: 0 0 0 4px var(--bg);
@@ -645,7 +647,6 @@ a {
   place-items: center;
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 50%;
   border: 1.5px solid var(--hairline-strong);
   color: transparent;
   transition:
@@ -830,7 +831,6 @@ a {
   place-items: center;
   width: 1.05rem;
   height: 1.05rem;
-  border-radius: 50%;
   border: 1.5px solid var(--hairline-strong);
   background: var(--surface);
   transition:
@@ -842,7 +842,6 @@ a {
   content: '';
   width: 0.46rem;
   height: 0.46rem;
-  border-radius: 50%;
   background: var(--slot);
   scale: 0;
   transition: scale 0.22s var(--ease-spring);
@@ -952,7 +951,6 @@ a {
   top: 0.55em;
   width: 5px;
   height: 5px;
-  border-radius: 50%;
   background: var(--slot);
 }
 
