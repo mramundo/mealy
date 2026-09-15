@@ -1,22 +1,14 @@
 import { useEffect, type CSSProperties } from 'react'
 import { PRODUCE, type ProduceName } from './produce.tsx'
 
-interface FloatingShape {
+interface Spot {
   name: ProduceName
   color: string
   size: number
-  top: string
-  left: string
-  /** Parallax factor: positive rises with the scroll, negative sinks. */
-  depth: number
+  /** Viewport percentages. */
+  top: number
+  left: number
   opacity: number
-  anim: 'drift' | 'sway'
-  dx: string
-  dy: string
-  rot: string
-  rot2: string
-  dur: string
-  delay: string
 }
 
 const RED = '#e8412e'
@@ -26,316 +18,90 @@ const PINK = '#de2a7e'
 const ORANGE = '#f59300'
 const TEAL = 'var(--teal)'
 const LEMON = 'var(--lemon)'
+const CARROT = 'var(--carrot)'
 
-/* Hand-placed: a dense ring around the margins, a thin scatter behind the
-   content. Shapes near the text run at half the opacity of the ones outside it. */
-const SHAPES: FloatingShape[] = [
+/*
+ * A full market stall. The ring around the margins runs at full strength; the
+ * shapes that fall behind the reading column are held at a third of it, so the
+ * background stays busy without ever competing with the text.
+ */
+const SPOTS: Spot[] = [
   // left margin
-  {
-    name: 'tomato',
-    color: RED,
-    size: 132,
-    top: '4%',
-    left: '-3%',
-    depth: 0.12,
-    opacity: 0.12,
-    anim: 'drift',
-    dx: '26px',
-    dy: '34px',
-    rot: '-9deg',
-    rot2: '7deg',
-    dur: '31s',
-    delay: '0s',
-  },
-  {
-    name: 'carrot',
-    color: ORANGE,
-    size: 124,
-    top: '30%',
-    left: '2%',
-    depth: -0.16,
-    opacity: 0.12,
-    anim: 'sway',
-    dx: '20px',
-    dy: '-26px',
-    rot: '12deg',
-    rot2: '-8deg',
-    dur: '38s',
-    delay: '-6s',
-  },
-  {
-    name: 'onion',
-    color: VIOLET,
-    size: 112,
-    top: '58%',
-    left: '-4%',
-    depth: 0.1,
-    opacity: 0.11,
-    anim: 'drift',
-    dx: '24px',
-    dy: '-30px',
-    rot: '-6deg',
-    rot2: '10deg',
-    dur: '44s',
-    delay: '-13s',
-  },
-  {
-    name: 'sprig',
-    color: GREEN,
-    size: 128,
-    top: '84%',
-    left: '4%',
-    depth: -0.14,
-    opacity: 0.12,
-    anim: 'sway',
-    dx: '-18px',
-    dy: '-24px',
-    rot: '10deg',
-    rot2: '-12deg',
-    dur: '35s',
-    delay: '-3s',
-  },
+  { name: 'tomato', color: RED, size: 132, top: 3, left: -3, opacity: 0.13 },
+  { name: 'courgette', color: GREEN, size: 118, top: 15, left: 6, opacity: 0.12 },
+  { name: 'carrot', color: CARROT, size: 124, top: 27, left: -2, opacity: 0.13 },
+  { name: 'cherries', color: RED, size: 104, top: 38, left: 7, opacity: 0.11 },
+  { name: 'onion', color: VIOLET, size: 112, top: 50, left: -4, opacity: 0.12 },
+  { name: 'bread', color: ORANGE, size: 122, top: 62, left: 5, opacity: 0.11 },
+  { name: 'sprig', color: GREEN, size: 120, top: 75, left: -3, opacity: 0.12 },
+  { name: 'watermelon', color: PINK, size: 112, top: 88, left: 6, opacity: 0.12 },
 
   // right margin
-  {
-    name: 'broccoli',
-    color: GREEN,
-    size: 142,
-    top: '2%',
-    left: '88%',
-    depth: -0.12,
-    opacity: 0.12,
-    anim: 'sway',
-    dx: '-22px',
-    dy: '30px',
-    rot: '8deg',
-    rot2: '-6deg',
-    dur: '41s',
-    delay: '-9s',
-  },
-  {
-    name: 'lemon',
-    color: LEMON,
-    size: 118,
-    top: '26%',
-    left: '93%',
-    depth: 0.16,
-    opacity: 0.14,
-    anim: 'drift',
-    dx: '-26px',
-    dy: '-22px',
-    rot: '-14deg',
-    rot2: '6deg',
-    dur: '33s',
-    delay: '-2s',
-  },
-  {
-    name: 'aubergine',
-    color: VIOLET,
-    size: 126,
-    top: '52%',
-    left: '90%',
-    depth: -0.1,
-    opacity: 0.11,
-    anim: 'drift',
-    dx: '-20px',
-    dy: '-32px',
-    rot: '14deg',
-    rot2: '-5deg',
-    dur: '46s',
-    delay: '-17s',
-  },
-  {
-    name: 'grapes',
-    color: PINK,
-    size: 108,
-    top: '78%',
-    left: '94%',
-    depth: 0.14,
-    opacity: 0.12,
-    anim: 'sway',
-    dx: '-24px',
-    dy: '-20px',
-    rot: '-8deg',
-    rot2: '12deg',
-    dur: '37s',
-    delay: '-11s',
-  },
+  { name: 'broccoli', color: GREEN, size: 138, top: 1, left: 88, opacity: 0.13 },
+  { name: 'lemon', color: LEMON, size: 116, top: 13, left: 79, opacity: 0.14 },
+  { name: 'pear', color: GREEN, size: 108, top: 25, left: 92, opacity: 0.11 },
+  { name: 'aubergine', color: VIOLET, size: 124, top: 37, left: 82, opacity: 0.12 },
+  { name: 'corn', color: LEMON, size: 118, top: 50, left: 93, opacity: 0.12 },
+  { name: 'grapes', color: PINK, size: 106, top: 62, left: 81, opacity: 0.12 },
+  { name: 'pumpkin', color: CARROT, size: 126, top: 74, left: 91, opacity: 0.12 },
+  { name: 'cabbage', color: GREEN, size: 108, top: 87, left: 80, opacity: 0.11 },
 
   // top band
-  {
-    name: 'pepper',
-    color: RED,
-    size: 96,
-    top: '-4%',
-    left: '32%',
-    depth: 0.18,
-    opacity: 0.08,
-    anim: 'drift',
-    dx: '18px',
-    dy: '26px',
-    rot: '10deg',
-    rot2: '-9deg',
-    dur: '40s',
-    delay: '-5s',
-  },
-  {
-    name: 'citrus',
-    color: ORANGE,
-    size: 104,
-    top: '-6%',
-    left: '64%',
-    depth: -0.15,
-    opacity: 0.08,
-    anim: 'sway',
-    dx: '-16px',
-    dy: '28px',
-    rot: '-12deg',
-    rot2: '8deg',
-    dur: '48s',
-    delay: '-21s',
-  },
+  { name: 'pepper', color: RED, size: 100, top: -4, left: 26, opacity: 0.1 },
+  { name: 'citrus', color: ORANGE, size: 106, top: -6, left: 47, opacity: 0.1 },
+  { name: 'peapod', color: GREEN, size: 112, top: -3, left: 66, opacity: 0.1 },
+  { name: 'banana', color: LEMON, size: 108, top: 6, left: 16, opacity: 0.09 },
 
   // bottom band
-  {
-    name: 'strawberry',
-    color: PINK,
-    size: 100,
-    top: '90%',
-    left: '30%',
-    depth: -0.18,
-    opacity: 0.1,
-    anim: 'sway',
-    dx: '22px',
-    dy: '-26px',
-    rot: '-10deg',
-    rot2: '8deg',
-    dur: '36s',
-    delay: '-8s',
-  },
-  {
-    name: 'apple',
-    color: RED,
-    size: 106,
-    top: '92%',
-    left: '58%',
-    depth: 0.12,
-    opacity: 0.1,
-    anim: 'drift',
-    dx: '-20px',
-    dy: '-30px',
-    rot: '7deg',
-    rot2: '-10deg',
-    dur: '43s',
-    delay: '-15s',
-  },
-  {
-    name: 'peapod',
-    color: GREEN,
-    size: 118,
-    top: '86%',
-    left: '74%',
-    depth: -0.13,
-    opacity: 0.11,
-    anim: 'drift',
-    dx: '18px',
-    dy: '-24px',
-    rot: '-6deg',
-    rot2: '11deg',
-    dur: '39s',
-    delay: '-4s',
-  },
+  { name: 'strawberry', color: PINK, size: 100, top: 91, left: 24, opacity: 0.11 },
+  { name: 'apple', color: RED, size: 106, top: 93, left: 44, opacity: 0.11 },
+  { name: 'cheese', color: LEMON, size: 110, top: 90, left: 64, opacity: 0.11 },
+  { name: 'mushroom', color: ORANGE, size: 96, top: 82, left: 34, opacity: 0.08 },
 
-  // thin scatter behind the content
-  {
-    name: 'avocado',
-    color: TEAL,
-    size: 92,
-    top: '42%',
-    left: '24%',
-    depth: 0.15,
-    opacity: 0.05,
-    anim: 'sway',
-    dx: '16px',
-    dy: '-22px',
-    rot: '9deg',
-    rot2: '-7deg',
-    dur: '45s',
-    delay: '-19s',
-  },
-  {
-    name: 'mushroom',
-    color: ORANGE,
-    size: 84,
-    top: '16%',
-    left: '54%',
-    depth: -0.11,
-    opacity: 0.05,
-    anim: 'drift',
-    dx: '-14px',
-    dy: '20px',
-    rot: '-8deg',
-    rot2: '9deg',
-    dur: '42s',
-    delay: '-7s',
-  },
-  {
-    name: 'citrus',
-    color: TEAL,
-    size: 88,
-    top: '66%',
-    left: '44%',
-    depth: 0.1,
-    opacity: 0.05,
-    anim: 'sway',
-    dx: '20px',
-    dy: '-18px',
-    rot: '11deg',
-    rot2: '-6deg',
-    dur: '50s',
-    delay: '-24s',
-  },
-  {
-    name: 'tomato',
-    color: PINK,
-    size: 78,
-    top: '34%',
-    left: '72%',
-    depth: -0.16,
-    opacity: 0.05,
-    anim: 'drift',
-    dx: '-18px',
-    dy: '22px',
-    rot: '-11deg',
-    rot2: '6deg',
-    dur: '34s',
-    delay: '-12s',
-  },
-  {
-    name: 'sprig',
-    color: GREEN,
-    size: 96,
-    top: '70%',
-    left: '16%',
-    depth: 0.13,
-    opacity: 0.06,
-    anim: 'sway',
-    dx: '14px',
-    dy: '-20px',
-    rot: '6deg',
-    rot2: '-10deg',
-    dur: '47s',
-    delay: '-16s',
-  },
+  // thin scatter behind the reading column
+  { name: 'avocado', color: TEAL, size: 92, top: 20, left: 36, opacity: 0.05 },
+  { name: 'fish', color: TEAL, size: 104, top: 31, left: 58, opacity: 0.05 },
+  { name: 'citrus', color: TEAL, size: 88, top: 44, left: 30, opacity: 0.05 },
+  { name: 'tomato', color: PINK, size: 80, top: 45, left: 66, opacity: 0.05 },
+  { name: 'sprig', color: GREEN, size: 96, top: 57, left: 24, opacity: 0.05 },
+  { name: 'pear', color: ORANGE, size: 84, top: 58, left: 62, opacity: 0.05 },
+  { name: 'peapod', color: GREEN, size: 92, top: 69, left: 44, opacity: 0.05 },
+  { name: 'grapes', color: VIOLET, size: 82, top: 72, left: 66, opacity: 0.05 },
+  { name: 'carrot', color: CARROT, size: 86, top: 70, left: 16, opacity: 0.05 },
+  { name: 'banana', color: LEMON, size: 90, top: 34, left: 18, opacity: 0.05 },
+  { name: 'cherries', color: RED, size: 78, top: 84, left: 54, opacity: 0.05 },
+  { name: 'courgette', color: GREEN, size: 88, top: 10, left: 58, opacity: 0.05 },
 ]
 
+/** Deterministic 0-1 noise, so every reload lays the stall out the same way. */
+function noise(index: number, salt: number): number {
+  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453
+  return value - Math.floor(value)
+}
+
+/** Per-shape motion derived from its index: amplitude, tilt, tempo, depth. */
+function motionVars(index: number): CSSProperties {
+  const spread = (salt: number) => noise(index, salt) * 2 - 1
+  const amplitude = 16 + noise(index, 1) * 26
+
+  return {
+    '--dx': `${(spread(2) * amplitude).toFixed(1)}px`,
+    '--dy': `${(spread(3) * amplitude).toFixed(1)}px`,
+    '--rot': `${(spread(4) * 13).toFixed(1)}deg`,
+    '--rot2': `${(spread(5) * 13).toFixed(1)}deg`,
+    '--dur': `${(29 + noise(index, 6) * 23).toFixed(1)}s`,
+    '--delay': `-${(noise(index, 7) * 26).toFixed(1)}s`,
+    '--depth': (spread(8) * 0.16).toFixed(3),
+    '--anim': noise(index, 9) > 0.5 ? 'sway' : 'drift',
+  } as CSSProperties
+}
+
 /**
- * Scroll offset drives a per-shape parallax. It lands on the document root so
- * every copy of the decor — page, top bar, dock — stays in step.
+ * Scroll offset drives a per-shape parallax: shapes with a positive depth rise
+ * with the scroll, negative ones sink, so the field stays evenly filled.
  */
-function useParallax(enabled: boolean) {
+function useParallax() {
   useEffect(() => {
-    if (!enabled) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const root = document.documentElement
@@ -354,52 +120,32 @@ function useParallax(enabled: boolean) {
       window.removeEventListener('scroll', onScroll)
       if (frame !== 0) window.cancelAnimationFrame(frame)
     }
-  }, [enabled])
+  }, [])
 }
 
-/**
- * `page` covers the viewport behind everything. `top` and `bottom` are the same
- * field of shapes re-drawn inside the sticky bars — both are viewport-sized and
- * pinned to the same corner as their bar, so the shapes line up with the page
- * copy and the bars read as a window onto it rather than a blank strip.
- */
-export function BackgroundDecor({ variant = 'page' }: { variant?: 'page' | 'top' | 'bottom' }) {
-  useParallax(variant === 'page')
+export function BackgroundDecor() {
+  useParallax()
 
   return (
-    <div className={variant === 'page' ? 'decor' : `decor decor--${variant}`} aria-hidden="true">
-      {SHAPES.map((shape, index) => {
-        const Shape = PRODUCE[shape.name]
+    <div className="decor" aria-hidden="true">
+      {SPOTS.map((spot, index) => {
+        const Shape = PRODUCE[spot.name]
         return (
           <span
-            key={`${shape.name}-${index}`}
+            key={`${spot.name}-${index}`}
             className="decor__layer"
             style={
               {
-                width: shape.size,
-                height: shape.size,
-                top: shape.top,
-                left: shape.left,
-                color: shape.color,
-                '--depth': shape.depth,
+                width: spot.size,
+                height: spot.size,
+                top: `${spot.top}%`,
+                left: `${spot.left}%`,
+                color: spot.color,
+                ...motionVars(index),
               } as CSSProperties
             }
           >
-            <span
-              className="decor__shape"
-              style={
-                {
-                  '--op': shape.opacity,
-                  '--anim': shape.anim,
-                  '--dx': shape.dx,
-                  '--dy': shape.dy,
-                  '--rot': shape.rot,
-                  '--rot2': shape.rot2,
-                  '--dur': shape.dur,
-                  '--delay': shape.delay,
-                } as CSSProperties
-              }
-            >
+            <span className="decor__shape" style={{ opacity: spot.opacity }}>
               <Shape width="100%" height="100%" />
             </span>
           </span>

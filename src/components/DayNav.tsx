@@ -2,7 +2,6 @@ import { useEffect, useRef, type CSSProperties, type KeyboardEvent } from 'react
 import type { DayId, LocaleCode } from '../data/types.ts'
 import { DAY_META, DAY_ORDER } from '../data/taxonomy.ts'
 import { ui } from '../i18n/strings.ts'
-import { BackgroundDecor } from './BackgroundDecor.tsx'
 
 export interface DayStat {
   done: number
@@ -46,8 +45,6 @@ export function DayNav({ active, locale, stats, onSelect }: DayNavProps) {
 
   return (
     <nav className="daynav" aria-label={ui.daysLabel[locale]}>
-      <BackgroundDecor variant="bottom" />
-
       <p className="daynav__title">{ui.week[locale]}</p>
 
       <div role="tablist" aria-orientation="vertical" className="daynav__list">

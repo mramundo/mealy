@@ -116,25 +116,6 @@ a {
   contain: strict;
 }
 
-/* Viewport-sized copies pinned inside the bars, clipped to their box. */
-.decor--top,
-.decor--bottom {
-  position: absolute;
-  inset: auto; /* clears the `inset: 0` above, which would over-constrain the box */
-  left: 0;
-  z-index: 0;
-  width: 100vw;
-  height: 100dvh;
-}
-
-.decor--top {
-  top: 0;
-}
-
-.decor--bottom {
-  bottom: 0;
-}
-
 .decor__layer {
   position: absolute;
   will-change: transform;
@@ -186,12 +167,11 @@ a {
   min-height: 100dvh;
 }
 
+/* Scrolls away with the page: no panel over the background, so the produce
+   behind it is never sliced at a bar edge. */
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  overflow: hidden;
-  background: var(--bg);
+  position: relative;
+  z-index: 2;
   border-bottom: 1px solid var(--hairline);
 }
 
@@ -324,16 +304,20 @@ a {
 
 /* ================================================== day nav ========= */
 
+/* A floating pill rather than a full-width strip: it reads as an object over
+   the background instead of a bar slicing through it. */
 .daynav {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  bottom: calc(0.7rem + env(safe-area-inset-bottom));
+  translate: -50% 0;
   z-index: 50;
-  overflow: hidden;
-  padding: 0.55rem max(var(--gutter), 0.75rem) calc(0.55rem + env(safe-area-inset-bottom));
+  width: min(100% - 1.4rem, 30rem);
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
   background: var(--bg);
-  border-top: 1px solid var(--hairline);
+  box-shadow: var(--shadow-raised);
 }
 
 .daynav__title {
@@ -408,17 +392,17 @@ a {
 @media (min-width: 980px) {
   .daynav {
     position: sticky;
-    top: 5.6rem;
+    left: auto;
+    bottom: auto;
+    top: 1.5rem;
+    translate: none;
     z-index: 1;
-    overflow: visible;
+    width: auto;
     padding: 0;
-    background: none;
     border: 0;
-  }
-
-  /* The rail is transparent already — no second copy needed. */
-  .decor--bottom {
-    display: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
   }
 
   .daynav__list {

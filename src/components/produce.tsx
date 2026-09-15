@@ -210,6 +210,145 @@ function CitrusSlice(props: ShapeProps) {
   )
 }
 
+function Banana(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M20 30c0 28 20 48 48 50 8 1 12-3 12-7 0-5-5-7-11-7-22-2-37-17-38-37 0-4-2-7-6-7s-5 4-5 8Z" />
+        <path d="M22 26c-3 2-5 5-5 8" />
+      </g>
+    </svg>
+  )
+}
+
+function Pear(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M53 28c-5 4-7 11-6 17-9 5-15 15-15 26 0 12 9 20 20 20s20-8 20-20c0-11-6-21-15-26 1-6-1-13-4-17Z" />
+        <path d="M53 28V15" />
+        <path d="M53 19c6-6 13-7 18-6-1 6-6 11-12 11Z" />
+      </g>
+    </svg>
+  )
+}
+
+function Cherries(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <circle cx="33" cy="70" r="14" />
+        <circle cx="67" cy="66" r="13" />
+        <path d="M33 56C39 37 51 23 70 16M67 53C65 38 66 26 70 16" />
+        <path d="M70 16c7-6 15-7 21-5-2 7-9 11-16 11Z" />
+      </g>
+    </svg>
+  )
+}
+
+function Watermelon(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M13 70c0-20 17-37 37-37s37 17 37 37Z" />
+        <path d="M22 70c0-15 13-28 28-28s28 13 28 28" />
+        <circle cx="50" cy="55" r="2" />
+        <circle cx="38" cy="62" r="2" />
+        <circle cx="62" cy="62" r="2" />
+      </g>
+    </svg>
+  )
+}
+
+function Corn(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M50 14c11 0 19 14 19 32s-8 34-19 34-19-16-19-34 8-32 19-32Z" />
+        <path d="M50 18v58M38 34c8 4 16 4 24 0M36 48c9 5 19 5 28 0M38 62c8 4 16 4 24 0" />
+        <path d="M31 50c-8-2-14-8-16-16 9-1 15 4 18 12ZM69 50c8-2 14-8 16-16-9-1-15 4-18 12Z" />
+      </g>
+    </svg>
+  )
+}
+
+function Pumpkin(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <ellipse cx="50" cy="59" rx="34" ry="27" />
+        <path d="M37 34c-6 14-6 36 0 50M63 34c6 14 6 36 0 50" />
+        <path d="M50 32V21" />
+        <path d="M50 24c6-5 12-6 17-5-2 6-7 10-13 10Z" />
+      </g>
+    </svg>
+  )
+}
+
+function Courgette(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M25 75c-6-6-4-18 6-28l21-21c10-10 22-12 28-6s4 18-6 28L53 69c-10 10-22 12-28 6Z" />
+        <path d="M76 22c4-4 9-5 13-4" />
+        <circle cx="45" cy="53" r="1.8" />
+        <circle cx="56" cy="42" r="1.8" />
+        <circle cx="36" cy="62" r="1.8" />
+      </g>
+    </svg>
+  )
+}
+
+function Fish(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M10 50c10-15 25-23 40-23s26 8 30 23c-4 15-15 23-30 23S20 65 10 50Z" />
+        <path d="M80 50c4-7 9-12 14-15v30c-5-3-10-8-14-15Z" />
+        <path d="M45 32c6 7 6 29 0 36" />
+        <circle cx="27" cy="44" r="2.6" />
+      </g>
+    </svg>
+  )
+}
+
+function Bread(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M17 71c0-22 15-37 33-37s33 15 33 37Z" />
+        <path d="M33 54c3-5 7-8 11-9M47 47c3-5 8-7 13-7M60 45c4-3 8-4 12-3" />
+      </g>
+    </svg>
+  )
+}
+
+function Cheese(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M16 74V52L84 30v44Z" />
+        <path d="M16 52 84 30" />
+        <circle cx="42" cy="63" r="4.5" />
+        <circle cx="62" cy="55" r="3.6" />
+        <circle cx="70" cy="66" r="3" />
+      </g>
+    </svg>
+  )
+}
+
+function Cabbage(props: ShapeProps) {
+  return (
+    <svg {...box} {...props}>
+      <g {...ink}>
+        <path d="M50 84c-18 0-32-14-32-31 0-15 13-27 32-27s32 12 32 27c0 17-14 31-32 31Z" />
+        <path d="M50 26c-9 9-14 21-14 34M50 26c9 9 14 21 14 34" />
+        <path d="M32 40c6 7 10 16 10 26M68 40c-6 7-10 16-10 26" />
+      </g>
+    </svg>
+  )
+}
+
 export const PRODUCE = {
   tomato: Tomato,
   carrot: Carrot,
@@ -226,6 +365,17 @@ export const PRODUCE = {
   grapes: Grapes,
   sprig: Sprig,
   citrus: CitrusSlice,
+  banana: Banana,
+  pear: Pear,
+  cherries: Cherries,
+  watermelon: Watermelon,
+  corn: Corn,
+  pumpkin: Pumpkin,
+  courgette: Courgette,
+  fish: Fish,
+  bread: Bread,
+  cheese: Cheese,
+  cabbage: Cabbage,
 } as const
 
 export type ProduceName = keyof typeof PRODUCE
