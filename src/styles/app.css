@@ -275,7 +275,6 @@ a {
   border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
 }
 
 .daynav__title {
@@ -575,7 +574,6 @@ a {
   height: 40px;
   background: var(--slot);
   color: #fff;
-  box-shadow: 0 0 0 4px var(--bg);
 }
 
 .meal__dot svg {
@@ -587,16 +585,10 @@ a {
   border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
   overflow: hidden;
   transition:
-    box-shadow 0.25s var(--ease-out),
     border-color 0.25s var(--ease-out),
     background 0.25s var(--ease-out);
-}
-
-.meal:hover .card {
-  box-shadow: var(--shadow-raised);
 }
 
 .card__head {
@@ -958,19 +950,14 @@ a {
 
 .blank .card {
   border-style: dashed;
-  box-shadow: none;
-  background: var(--surface-sunken);
+  border-color: color-mix(in srgb, var(--slot) 32%, var(--hairline));
+  background: color-mix(in srgb, var(--slot-soft) 42%, var(--surface));
 }
 
 .blank .meal__dot {
-  background: var(--surface);
-  color: var(--ink-3);
-  border: 1.5px dashed var(--hairline-strong);
-}
-
-.blank .card__name,
-.blank .card__slot {
-  color: var(--ink-3);
+  background: color-mix(in srgb, var(--slot-soft) 70%, var(--surface));
+  color: var(--slot-deep);
+  border: 1.5px dashed color-mix(in srgb, var(--slot) 45%, transparent);
 }
 
 .blank .card__head {
@@ -979,7 +966,12 @@ a {
 
 .blank .card__body {
   font-size: 0.88rem;
-  color: var(--ink-3);
+  color: var(--ink-2);
+}
+
+.blank .free__mark {
+  font-size: 1.15rem;
+  color: var(--slot-deep);
 }
 
 .freebanner {
