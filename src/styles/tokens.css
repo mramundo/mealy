@@ -11,7 +11,7 @@
      background stay faintly visible through them without touching legibility. */
   --bg: #ffffff;
   --surface: rgba(255, 255, 255, 0.62);
-  --surface-strong: rgba(255, 255, 255, 0.82);
+  --surface-strong: rgba(255, 255, 255, 0.93);
   --surface-sunken: rgba(243, 242, 238, 0.66);
   --ink: #1a1a18;
   --ink-2: #57544d;
