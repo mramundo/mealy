@@ -11,7 +11,6 @@
      background stay faintly visible through them without touching legibility. */
   --bg: #ffffff;
   --surface: rgba(255, 255, 255, 0.62);
-  --surface-strong: rgba(255, 255, 255, 0.93);
   --surface-sunken: rgba(243, 242, 238, 0.66);
   --ink: #1a1a18;
   --ink-2: #57544d;
@@ -43,7 +42,6 @@
   --gutter: clamp(1.1rem, 4vw, 2.5rem);
   --wrap: 1160px;
   --column: 760px;
-  --dock: 74px;
 
   --shadow-card: 0 1px 2px rgba(26, 26, 24, 0.04), 0 10px 30px -18px rgba(26, 26, 24, 0.28);
   --shadow-raised: 0 2px 4px rgba(26, 26, 24, 0.05), 0 18px 40px -20px rgba(26, 26, 24, 0.34);
