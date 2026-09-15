@@ -116,6 +116,25 @@ a {
   contain: strict;
 }
 
+/* Viewport-sized copies pinned inside the bars, clipped to their box. */
+.decor--top,
+.decor--bottom {
+  position: absolute;
+  inset: auto; /* clears the `inset: 0` above, which would over-constrain the box */
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100dvh;
+}
+
+.decor--top {
+  top: 0;
+}
+
+.decor--bottom {
+  bottom: 0;
+}
+
 .decor__layer {
   position: absolute;
   will-change: transform;
@@ -171,12 +190,14 @@ a {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(14px) saturate(1.4);
+  overflow: hidden;
+  background: var(--bg);
   border-bottom: 1px solid var(--hairline);
 }
 
 .topbar__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -309,17 +330,21 @@ a {
   right: 0;
   bottom: 0;
   z-index: 50;
+  overflow: hidden;
   padding: 0.55rem max(var(--gutter), 0.75rem) calc(0.55rem + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(16px) saturate(1.4);
+  background: var(--bg);
   border-top: 1px solid var(--hairline);
 }
 
 .daynav__title {
+  position: relative;
+  z-index: 1;
   display: none;
 }
 
 .daynav__list {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -385,10 +410,15 @@ a {
     position: sticky;
     top: 5.6rem;
     z-index: 1;
+    overflow: visible;
     padding: 0;
     background: none;
-    backdrop-filter: none;
     border: 0;
+  }
+
+  /* The rail is transparent already — no second copy needed. */
+  .decor--bottom {
+    display: none;
   }
 
   .daynav__list {

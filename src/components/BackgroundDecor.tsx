@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties, type RefObject } from 'react'
+import { useEffect, type CSSProperties } from 'react'
 import { PRODUCE, type ProduceName } from './produce.tsx'
 
 interface FloatingShape {
@@ -329,17 +329,20 @@ const SHAPES: FloatingShape[] = [
   },
 ]
 
-/** Scroll offset drives a per-shape parallax; skipped when motion is reduced. */
-function useParallax(target: RefObject<HTMLDivElement | null>) {
+/**
+ * Scroll offset drives a per-shape parallax. It lands on the document root so
+ * every copy of the decor — page, top bar, dock — stays in step.
+ */
+function useParallax(enabled: boolean) {
   useEffect(() => {
-    const node = target.current
-    if (!node) return
+    if (!enabled) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    const root = document.documentElement
     let frame = 0
     const apply = () => {
       frame = 0
-      node.style.setProperty('--sy', `${window.scrollY}px`)
+      root.style.setProperty('--sy', `${window.scrollY}px`)
     }
     const onScroll = () => {
       if (frame === 0) frame = window.requestAnimationFrame(apply)
@@ -351,15 +354,20 @@ function useParallax(target: RefObject<HTMLDivElement | null>) {
       window.removeEventListener('scroll', onScroll)
       if (frame !== 0) window.cancelAnimationFrame(frame)
     }
-  }, [target])
+  }, [enabled])
 }
 
-export function BackgroundDecor() {
-  const root = useRef<HTMLDivElement>(null)
-  useParallax(root)
+/**
+ * `page` covers the viewport behind everything. `top` and `bottom` are the same
+ * field of shapes re-drawn inside the sticky bars — both are viewport-sized and
+ * pinned to the same corner as their bar, so the shapes line up with the page
+ * copy and the bars read as a window onto it rather than a blank strip.
+ */
+export function BackgroundDecor({ variant = 'page' }: { variant?: 'page' | 'top' | 'bottom' }) {
+  useParallax(variant === 'page')
 
   return (
-    <div className="decor" ref={root} aria-hidden="true">
+    <div className={variant === 'page' ? 'decor' : `decor decor--${variant}`} aria-hidden="true">
       {SHAPES.map((shape, index) => {
         const Shape = PRODUCE[shape.name]
         return (

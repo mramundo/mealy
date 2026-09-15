@@ -1,6 +1,7 @@
 import type { LocaleCode } from '../data/types.ts'
 import { LOCALES } from '../i18n/locale.ts'
 import { ui } from '../i18n/strings.ts'
+import { BackgroundDecor } from './BackgroundDecor.tsx'
 import { BrandMark } from './brand.tsx'
 import { DownloadIcon } from './icons.tsx'
 
@@ -14,6 +15,8 @@ interface TopBarProps {
 export function TopBar({ locale, onLocaleChange, canInstall, onInstall }: TopBarProps) {
   return (
     <header className="topbar">
+      <BackgroundDecor variant="top" />
+
       <div className="wrap topbar__inner">
         <div className="brand">
           <BrandMark />
