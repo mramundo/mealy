@@ -1,75 +1,77 @@
 /* ------------------------------------------------------------------
-   Design tokens — a warm paper ground with five loud "food" accents.
-   Every meal slot owns one accent; the slot is set on an ancestor with
-   `data-slot`, so cards, chips and icons all read from --slot.
+   Design tokens — white ground, colour only where it carries meaning.
+   Each meal slot owns an accent; `data-slot` on an ancestor switches
+   --slot / --slot-deep / --slot-soft for everything inside it.
    ------------------------------------------------------------------ */
 
 :root {
   color-scheme: light;
 
-  /* Paper & ink */
-  --cream: #fff9f0;
-  --cream-deep: #fdf0dd;
-  --paper: #ffffff;
-  --ink: #241f1a;
-  --ink-soft: #6b6055;
-  --ink-faint: #9a8d7e;
-  --line: #e7dbc7;
+  /* Surfaces & ink */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-sunken: #faf9f7;
+  --ink: #1a1a18;
+  --ink-2: #57544d;
+  --ink-3: #8d8980;
+  --hairline: #ecebe6;
+  --hairline-strong: #dbd8d1;
 
-  /* Produce palette — also used by the drifting background shapes */
-  --amber: #f5a623;
-  --basil: #57a639;
-  --tomato: #e8412f;
-  --berry: #d62b7f;
-  --aubergine: #6246c8;
+  /* Semantic */
+  --go: #17a94b;
+  --go-soft: #e7f7ec;
+
+  /* Produce accents, used by the drifting background shapes */
   --carrot: #ff8a3d;
-  --lemon: #ffd23f;
-  --teal: #0fa39a;
+  --lemon: #ffc633;
+  --teal: #12a89b;
   --radish: #ff5d8f;
 
   /* Type */
-  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-sans:
-    'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Rhythm */
-  --radius-sm: 10px;
-  --radius-md: 16px;
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
   --radius-lg: 24px;
   --radius-pill: 999px;
-  --gutter: clamp(1rem, 4vw, 2.5rem);
-  --shell: 1180px;
+  --gutter: clamp(1.1rem, 4vw, 2.5rem);
+  --wrap: 1160px;
+  --column: 760px;
+  --dock: 74px;
 
-  /* The signature offset shadow */
-  --pop: 5px 6px 0;
-  --pop-lg: 8px 9px 0;
+  --shadow-card: 0 1px 2px rgba(26, 26, 24, 0.04), 0 10px 30px -18px rgba(26, 26, 24, 0.28);
+  --shadow-raised: 0 2px 4px rgba(26, 26, 24, 0.05), 0 18px 40px -20px rgba(26, 26, 24, 0.34);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.32, 0.52, 1);
+  --ease-spring: cubic-bezier(0.34, 1.42, 0.5, 1);
 }
 
 [data-slot='breakfast'] {
-  --slot: var(--amber);
-  --slot-ink: #8a4b00;
-  --slot-tint: #fff1d9;
+  --slot: #f59300;
+  --slot-deep: #8f5000;
+  --slot-soft: #fff4e3;
 }
 [data-slot='morningSnack'] {
-  --slot: var(--basil);
-  --slot-ink: #2f5f1d;
-  --slot-tint: #e9f6dd;
+  --slot: #17a94b;
+  --slot-deep: #0e6b31;
+  --slot-soft: #e7f7ec;
 }
 [data-slot='lunch'] {
-  --slot: var(--tomato);
-  --slot-ink: #8e1b10;
-  --slot-tint: #ffe5df;
+  --slot: #e8412e;
+  --slot-deep: #a81f13;
+  --slot-soft: #ffedea;
 }
 [data-slot='afternoonSnack'] {
-  --slot: var(--berry);
-  --slot-ink: #7e1049;
-  --slot-tint: #ffe2ef;
+  --slot: #de2a7e;
+  --slot-deep: #9c0f52;
+  --slot-soft: #ffebf3;
 }
 [data-slot='dinner'] {
-  --slot: var(--aubergine);
-  --slot-ink: #38257f;
-  --slot-tint: #eae4ff;
+  --slot: #6b4ae3;
+  --slot-deep: #3f2aa6;
+  --slot-soft: #efebff;
 }

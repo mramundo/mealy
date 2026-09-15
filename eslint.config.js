@@ -25,7 +25,7 @@ export default tseslint.config(
   {
     // Icon and shape catalogues export lookup maps next to their components;
     // Fast Refresh granularity is not a concern for static SVG.
-    files: ['src/components/icons.tsx', 'src/components/produce.tsx'],
+    files: ['src/components/icons.tsx', 'src/components/produce.tsx', 'src/components/brand.tsx'],
     rules: { 'react-refresh/only-export-components': 'off' },
   },
 )

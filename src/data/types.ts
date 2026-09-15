@@ -11,18 +11,21 @@ export interface FoodEntry {
   /** Net weight or measure, e.g. "50 g". Language independent. */
   qty: string
   name: Localized
-  /** Practical translation of the weight, e.g. "2 slices". */
+  /** What the weight means in practice, e.g. "2 slices". */
   hint?: Localized
 }
 
 export interface FoodItem extends FoodEntry {
-  /** Swaps for the main choice — the "oppure" lines of the plan. */
+  /** Interchangeable choices: pick one of `[item, ...alternatives]`. */
   alternatives?: FoodEntry[]
 }
 
 export interface Meal {
   items: FoodItem[]
-  note?: Localized
+  /** Whole-meal alternatives to the item list above. */
+  swaps?: Localized[]
+  /** Short, self-contained pieces of advice from the plan. */
+  tips?: Localized[]
   /** No fixed meal: the weekly free meal. */
   free?: true
 }

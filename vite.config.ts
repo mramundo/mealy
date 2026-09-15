@@ -26,8 +26,8 @@ export default defineConfig({
         scope: '.',
         display: 'standalone',
         orientation: 'portrait-primary',
-        background_color: '#FFF9F0',
-        theme_color: '#FFF9F0',
+        background_color: '#FFFFFF',
+        theme_color: '#FFFFFF',
         categories: ['food', 'health', 'lifestyle'],
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },

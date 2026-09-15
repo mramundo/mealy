@@ -3,32 +3,36 @@ import type { Localized } from '../data/types.ts'
 const t = (it: string, en: string): Localized => ({ it, en })
 
 export const ui = {
-  tagline: t(
-    'Il piano della settimana, un pasto alla volta. Spunta quello che hai già mangiato.',
-    'Your week of meals, one plate at a time. Tick off what you have eaten.',
-  ),
-  skip: t('Vai al contenuto', 'Skip to content'),
+  tagline: t('Il tuo piano, giorno per giorno', 'Your plan, day by day'),
+  skip: t('Vai al piano del giorno', 'Skip to the day’s plan'),
   language: t('Lingua', 'Language'),
+  week: t('La settimana', 'The week'),
+  weekProgress: t('Pasti della settimana', 'Meals this week'),
   daysLabel: t('Giorni della settimana', 'Days of the week'),
   prevDay: t('Giorno precedente', 'Previous day'),
   nextDay: t('Giorno successivo', 'Next day'),
   markDone: t('Segna come fatto', 'Mark as done'),
   markUndone: t('Segna come da fare', 'Mark as not done'),
-  clearDay: t('Azzera il giorno', 'Clear day'),
-  or: t('oppure', 'or'),
-  note: t('Nota', 'Note'),
+  done: t('Fatto', 'Done'),
+  clearDay: t('Azzera', 'Reset'),
+  tips: t('Come farlo', 'How to make it'),
   freeMeal: t('Pasto libero', 'Free meal'),
-  notPlanned: t('Non previsto', 'Not planned'),
+  notPlanned: t('Niente in programma', 'Nothing planned'),
   notPlannedBody: t(
-    'Il piano non prevede nulla in questo momento della giornata.',
-    'The plan has nothing scheduled at this point of the day.',
+    'Il piano non prevede questo momento della giornata.',
+    'The plan skips this point of the day.',
   ),
+  pickVersion: t('Oppure scegli una versione', 'Or pick a version'),
+  baseVersion: t('Il piano qui sopra', 'The plan above'),
   install: t('Installa', 'Install'),
-  progressTitle: t('Pasti completati', 'Meals completed'),
   footerNote: t('Piano alimentare personale, digitalizzato.', 'A personal meal plan, digitised.'),
-  github: t('Il mio GitHub', 'My GitHub'),
 } as const
 
-export function progressText(done: number, total: number, locale: 'it' | 'en'): string {
-  return locale === 'it' ? `${done} di ${total} pasti fatti` : `${done} of ${total} meals done`
+export function pickOne(total: number, locale: 'it' | 'en'): string {
+  return locale === 'it' ? `Scegli 1 di ${total}` : `Pick 1 of ${total}`
+}
+
+export function mealCount(done: number, total: number, locale: 'it' | 'en'): string {
+  if (locale === 'it') return `${done} di ${total} pasti`
+  return `${done} of ${total} meals`
 }

@@ -11,14 +11,14 @@ export const SLOT_ORDER = [
 ] as const satisfies readonly SlotId[]
 
 export const SLOT_META: Record<SlotId, { label: Localized; when: Localized }> = {
-  breakfast: { label: t('Colazione', 'Breakfast'), when: t('in tarda mattinata', 'late morning') },
-  morningSnack: { label: t('Spuntino', 'Morning snack'), when: t('metà mattina', 'mid-morning') },
-  lunch: { label: t('Pranzo', 'Lunch'), when: t('pasto principale', 'main meal') },
+  breakfast: { label: t('Colazione', 'Breakfast'), when: t('Tarda mattinata', 'Late morning') },
+  morningSnack: { label: t('Spuntino', 'Morning snack'), when: t('Metà mattina', 'Mid-morning') },
+  lunch: { label: t('Pranzo', 'Lunch'), when: t('Pasto principale', 'Main meal') },
   afternoonSnack: {
     label: t('Merenda', 'Afternoon snack'),
-    when: t('metà pomeriggio', 'mid-afternoon'),
+    when: t('Metà pomeriggio', 'Mid-afternoon'),
   },
-  dinner: { label: t('Cena', 'Dinner'), when: t('sera', 'evening') },
+  dinner: { label: t('Cena', 'Dinner'), when: t('Sera', 'Evening') },
 }
 
 export const DAY_ORDER = [
@@ -31,14 +31,14 @@ export const DAY_ORDER = [
   'sun',
 ] as const satisfies readonly DayId[]
 
-export const DAY_META: Record<DayId, { label: Localized; short: Localized }> = {
-  mon: { label: t('Lunedì', 'Monday'), short: t('Lun', 'Mon') },
-  tue: { label: t('Martedì', 'Tuesday'), short: t('Mar', 'Tue') },
-  wed: { label: t('Mercoledì', 'Wednesday'), short: t('Mer', 'Wed') },
-  thu: { label: t('Giovedì', 'Thursday'), short: t('Gio', 'Thu') },
-  fri: { label: t('Venerdì', 'Friday'), short: t('Ven', 'Fri') },
-  sat: { label: t('Sabato', 'Saturday'), short: t('Sab', 'Sat') },
-  sun: { label: t('Domenica', 'Sunday'), short: t('Dom', 'Sun') },
+export const DAY_META: Record<DayId, { label: Localized; short: Localized; mini: Localized }> = {
+  mon: { label: t('Lunedì', 'Monday'), short: t('Lun', 'Mon'), mini: t('Lu', 'Mo') },
+  tue: { label: t('Martedì', 'Tuesday'), short: t('Mar', 'Tue'), mini: t('Ma', 'Tu') },
+  wed: { label: t('Mercoledì', 'Wednesday'), short: t('Mer', 'Wed'), mini: t('Me', 'We') },
+  thu: { label: t('Giovedì', 'Thursday'), short: t('Gio', 'Thu'), mini: t('Gi', 'Th') },
+  fri: { label: t('Venerdì', 'Friday'), short: t('Ven', 'Fri'), mini: t('Ve', 'Fr') },
+  sat: { label: t('Sabato', 'Saturday'), short: t('Sab', 'Sat'), mini: t('Sa', 'Sa') },
+  sun: { label: t('Domenica', 'Sunday'), short: t('Dom', 'Sun'), mini: t('Do', 'Su') },
 }
 
 /** Monday-first index of the current weekday — the only calendar hint the app uses. */
