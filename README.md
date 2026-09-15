@@ -1,5 +1,7 @@
 # Mealy
 
+**[mramundo.github.io/mealy](https://mramundo.github.io/mealy/)**
+
 A small PWA that turns a weekly meal plan into something you can actually use on a
 phone: seven days, five slots a day, tick each meal off as you eat it.
 
