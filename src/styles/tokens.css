@@ -7,11 +7,11 @@
 :root {
   color-scheme: light;
 
-  /* Surfaces & ink. Panels are deliberately translucent: the drawings in the
-     background stay faintly visible through them without touching legibility. */
+  /* Surfaces & ink. Every panel is opaque so text always sits on a flat
+     ground; only the top bar is left bare, to run into the background. */
   --bg: #ffffff;
-  --surface: rgba(255, 255, 255, 0.62);
-  --surface-sunken: rgba(243, 242, 238, 0.66);
+  --surface: #ffffff;
+  --surface-sunken: #f7f6f2;
   --ink: #1a1a18;
   --ink-2: #57544d;
   --ink-3: #8d8980;
@@ -20,7 +20,7 @@
 
   /* Semantic */
   --go: #17a94b;
-  --go-soft: rgba(23, 169, 75, 0.12);
+  --go-soft: #e6f6ec;
 
   /* Produce accents, used by the drifting background shapes */
   --carrot: #ff8a3d;
@@ -33,12 +33,12 @@
   --font-sans:
     'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  /* Rhythm */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
-  --radius-pill: 999px;
+  /* Rhythm. Corners are barely broken — the UI reads as squared off. */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 4px;
   --gutter: clamp(1.1rem, 4vw, 2.5rem);
   --wrap: 1160px;
   --column: 760px;
@@ -53,25 +53,25 @@
 [data-slot='breakfast'] {
   --slot: #f59300;
   --slot-deep: #8f5000;
-  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, #ffffff);
 }
 [data-slot='morningSnack'] {
   --slot: #17a94b;
   --slot-deep: #0e6b31;
-  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, #ffffff);
 }
 [data-slot='lunch'] {
   --slot: #e8412e;
   --slot-deep: #a81f13;
-  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, #ffffff);
 }
 [data-slot='afternoonSnack'] {
   --slot: #de2a7e;
   --slot-deep: #9c0f52;
-  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, #ffffff);
 }
 [data-slot='dinner'] {
   --slot: #6b4ae3;
   --slot-deep: #3f2aa6;
-  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, #ffffff);
 }

@@ -323,7 +323,7 @@ a {
   border-radius: 50%;
   background: conic-gradient(
     var(--go) calc(var(--p) * 360deg),
-    color-mix(in srgb, var(--ink) 13%, transparent) 0
+    color-mix(in srgb, var(--ink) 13%, var(--bg)) 0
   );
   -webkit-mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
   mask: radial-gradient(closest-side, transparent calc(100% - var(--track)), #000 0);
@@ -400,11 +400,11 @@ a {
   }
 
   .dayitem:hover {
-    background: color-mix(in srgb, var(--ink) 5%, transparent);
+    background: color-mix(in srgb, var(--ink) 5%, var(--surface));
   }
 
   .dayitem[aria-selected='true'] {
-    background: color-mix(in srgb, var(--ink) 9%, transparent);
+    background: color-mix(in srgb, var(--ink) 9%, var(--surface));
   }
 
   .dayitem__ring {
@@ -477,7 +477,7 @@ a {
   flex: 1;
   height: 6px;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--slot) 24%, transparent);
+  background: color-mix(in srgb, var(--slot) 24%, var(--bg));
   transition: background 0.35s var(--ease-out);
 }
 
@@ -558,7 +558,7 @@ a {
   bottom: -2px;
   width: 2px;
   border-radius: 2px;
-  background: color-mix(in srgb, var(--slot) 34%, transparent);
+  background: color-mix(in srgb, var(--slot) 34%, var(--bg));
 }
 
 .meal:last-child::before {
@@ -573,7 +573,7 @@ a {
   border-radius: 50%;
   background: var(--slot);
   color: #fff;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.72);
+  box-shadow: 0 0 0 4px var(--bg);
 }
 
 .meal__dot svg {
@@ -849,7 +849,7 @@ a {
 }
 
 .option:hover {
-  background: color-mix(in srgb, var(--slot-soft) 70%, transparent);
+  background: color-mix(in srgb, var(--slot-soft) 70%, var(--surface));
 }
 
 .option:has(input:checked) {
@@ -961,7 +961,7 @@ a {
 .blank .card {
   border-style: dashed;
   box-shadow: none;
-  background: transparent;
+  background: var(--surface-sunken);
 }
 
 .blank .meal__dot {
