@@ -108,7 +108,6 @@ a {
 /* ================================================== decor =========== */
 
 .decor {
-  --shape-scale: 1;
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -117,45 +116,13 @@ a {
   contain: strict;
 }
 
-@media (max-width: 700px) {
-  .decor {
-    --shape-scale: 0.55;
-  }
-}
-
 .decor__shape {
   position: absolute;
   display: block;
-  width: calc(var(--size, 110px) * var(--shape-scale, 1));
-  height: calc(var(--size, 110px) * var(--shape-scale, 1));
-  opacity: var(--op, 0.1);
-  animation: var(--anim, drift) var(--dur, 34s) ease-in-out infinite alternate;
-  animation-delay: var(--delay, 0s);
 }
 
 .decor__shape svg {
   display: block;
-}
-
-@keyframes drift {
-  from {
-    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));
-  }
-  to {
-    transform: translate3d(var(--dx, 20px), var(--dy, -26px), 0) rotate(var(--rot2, 10deg));
-  }
-}
-
-@keyframes sway {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
-  }
-  50% {
-    transform: translate3d(var(--dx, 20px), 0, 0) rotate(0deg) scale(1.07);
-  }
-  100% {
-    transform: translate3d(0, var(--dy, -26px), 0) rotate(var(--rot2, 10deg)) scale(1);
-  }
 }
 
 /* ================================================== top bar ========= */
@@ -317,7 +284,8 @@ a {
   padding: 0.4rem 0.55rem;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
-  background: var(--bg);
+  background: var(--surface-strong);
+  backdrop-filter: blur(10px);
   box-shadow: var(--shadow-raised);
 }
 
@@ -354,7 +322,10 @@ a {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: conic-gradient(var(--go) calc(var(--p) * 360deg), var(--hairline) 0);
+  background: conic-gradient(
+    var(--go) calc(var(--p) * 360deg),
+    color-mix(in srgb, var(--ink) 11%, transparent) 0
+  );
   transition: background 0.4s var(--ease-out);
 }
 
@@ -506,7 +477,7 @@ a {
   flex: 1;
   height: 6px;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--slot) 20%, var(--hairline));
+  background: color-mix(in srgb, var(--slot) 24%, transparent);
   transition: background 0.35s var(--ease-out);
 }
 
@@ -587,7 +558,7 @@ a {
   bottom: -2px;
   width: 2px;
   border-radius: 2px;
-  background: color-mix(in srgb, var(--slot) 26%, var(--hairline));
+  background: color-mix(in srgb, var(--slot) 34%, transparent);
 }
 
 .meal:last-child::before {
@@ -602,7 +573,7 @@ a {
   border-radius: 50%;
   background: var(--slot);
   color: #fff;
-  box-shadow: 0 0 0 4px var(--bg);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.72);
 }
 
 .meal__dot svg {
@@ -1061,6 +1032,7 @@ a {
   padding: 0.4rem 0.8rem;
   border-radius: var(--radius-pill);
   border: 1px solid var(--hairline-strong);
+  background: var(--surface);
   color: var(--ink);
   font-weight: 700;
   text-decoration: none;
@@ -1098,9 +1070,5 @@ a {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-
-  .decor__shape {
-    animation: none !important;
   }
 }

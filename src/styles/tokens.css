@@ -7,10 +7,12 @@
 :root {
   color-scheme: light;
 
-  /* Surfaces & ink */
+  /* Surfaces & ink. Panels are deliberately translucent: the drawings in the
+     background stay faintly visible through them without touching legibility. */
   --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-sunken: #faf9f7;
+  --surface: rgba(255, 255, 255, 0.62);
+  --surface-strong: rgba(255, 255, 255, 0.86);
+  --surface-sunken: rgba(243, 242, 238, 0.66);
   --ink: #1a1a18;
   --ink-2: #57544d;
   --ink-3: #8d8980;
@@ -19,7 +21,7 @@
 
   /* Semantic */
   --go: #17a94b;
-  --go-soft: #e7f7ec;
+  --go-soft: rgba(23, 169, 75, 0.12);
 
   /* Produce accents, used by the drifting background shapes */
   --carrot: #ff8a3d;
@@ -53,25 +55,25 @@
 [data-slot='breakfast'] {
   --slot: #f59300;
   --slot-deep: #8f5000;
-  --slot-soft: #fff4e3;
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
 }
 [data-slot='morningSnack'] {
   --slot: #17a94b;
   --slot-deep: #0e6b31;
-  --slot-soft: #e7f7ec;
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
 }
 [data-slot='lunch'] {
   --slot: #e8412e;
   --slot-deep: #a81f13;
-  --slot-soft: #ffedea;
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
 }
 [data-slot='afternoonSnack'] {
   --slot: #de2a7e;
   --slot-deep: #9c0f52;
-  --slot-soft: #ffebf3;
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
 }
 [data-slot='dinner'] {
   --slot: #6b4ae3;
   --slot-deep: #3f2aa6;
-  --slot-soft: #efebff;
+  --slot-soft: color-mix(in srgb, var(--slot) 15%, transparent);
 }
