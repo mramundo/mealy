@@ -704,12 +704,15 @@ a {
   padding: 0 0.95rem 1rem;
 }
 
+/* Ticked off: the green already used by the check and the day counts, rather
+   than a grey that sits outside the palette. */
 .meal[data-done='true'] .card {
-  background: var(--surface-sunken);
+  border-color: color-mix(in srgb, var(--go) 26%, var(--hairline));
+  background: color-mix(in srgb, var(--go-soft) 55%, var(--surface));
 }
 
 .meal[data-done='true'] .card__body {
-  opacity: 0.5;
+  opacity: 0.62;
 }
 
 /* ================================================== food rows ======= */
