@@ -54,7 +54,9 @@
 
   /* Controls: one size for every square control and marker */
   --control: 2.25rem;
-  /* Rules: panels 1px, small form marks 1.5px, rails 2px */
+  /* Rules: panels and every dashed edge 1px, solid form marks 1.5px, rails
+     2px. Dashed edges stay on whole pixels: WebKit drops the vertical sides
+     of fractional-width dashed borders on 3x screens. */
   --rule: 1px;
   --rule-mark: 1.5px;
   --rule-rail: 2px;

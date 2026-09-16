@@ -905,8 +905,11 @@ a {
   background: color-mix(in srgb, var(--slot-soft) 42%, var(--surface));
 }
 
+/* 1px, like the card's own dashed edge. At 1.5px WebKit snaps the width to
+   4 device pixels on a 3x screen and, with the marker at a fractional x,
+   clips the vertical dashes away entirely — only top and bottom survive. */
 .blank .meal__dot {
-  border: var(--rule-mark) dashed color-mix(in srgb, var(--slot) 45%, transparent);
+  border: var(--rule) dashed color-mix(in srgb, var(--slot) 55%, transparent);
   background: color-mix(in srgb, var(--slot-soft) 70%, var(--surface));
   color: var(--slot-deep);
 }
