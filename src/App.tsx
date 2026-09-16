@@ -150,12 +150,9 @@ export default function App() {
                 <p className="dayhead__meta">
                   {mealCount(doneCount, plannedSlots.length, locale)}
                   {doneCount > 0 && (
-                    <>
-                      <span aria-hidden="true">·</span>
-                      <button type="button" className="textbtn" onClick={clearDay}>
-                        {ui.clearDay[locale]}
-                      </button>
-                    </>
+                    <button type="button" className="textbtn" onClick={clearDay}>
+                      {ui.clearDay[locale]}
+                    </button>
                   )}
                 </p>
               </div>

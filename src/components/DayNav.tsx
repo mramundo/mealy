@@ -45,8 +45,6 @@ export function DayNav({ active, locale, stats, onSelect }: DayNavProps) {
 
   return (
     <nav className="daynav" aria-label={ui.daysLabel[locale]}>
-      <p className="daynav__title">{ui.week[locale]}</p>
-
       <div role="tablist" aria-orientation="vertical" className="daynav__list">
         {DAY_ORDER.map((day) => {
           const selected = day === active

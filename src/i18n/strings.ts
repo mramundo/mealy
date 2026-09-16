@@ -6,8 +6,6 @@ export const ui = {
   tagline: t('Il tuo piano, giorno per giorno', 'Your plan, day by day'),
   skip: t('Vai al piano del giorno', 'Skip to the day’s plan'),
   language: t('Lingua', 'Language'),
-  week: t('La settimana', 'The week'),
-  weekProgress: t('Pasti della settimana', 'Meals this week'),
   daysLabel: t('Giorni della settimana', 'Days of the week'),
   prevDay: t('Giorno precedente', 'Previous day'),
   nextDay: t('Giorno successivo', 'Next day'),
@@ -25,7 +23,7 @@ export const ui = {
   pickVersion: t('Oppure scegli una versione', 'Or pick a version'),
   baseVersion: t('Il piano qui sopra', 'The plan above'),
   install: t('Installa', 'Install'),
-  footerNote: t('Piano alimentare personale, digitalizzato.', 'A personal meal plan, digitised.'),
+  footerNote: t('Mealy, il piano alimentare in digitale.', 'Mealy, the meal plan gone digital.'),
 } as const
 
 export function pickOne(total: number, locale: 'it' | 'en'): string {

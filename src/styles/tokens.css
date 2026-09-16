@@ -1,5 +1,11 @@
 /* ------------------------------------------------------------------
-   Design tokens — white ground, colour only where it carries meaning.
+   Design tokens.
+
+   The loud parts of Mealy are the hand-drawn produce behind the page and
+   the five meal colours. Everything else is kept quiet and regular: flat
+   white panels, 1px rules, right angles, one control size, a five-step
+   type scale and a 4px spacing grid.
+
    Each meal slot owns an accent; `data-slot` on an ancestor switches
    --slot / --slot-deep / --slot-soft for everything inside it.
    ------------------------------------------------------------------ */
@@ -7,8 +13,7 @@
 :root {
   color-scheme: light;
 
-  /* Surfaces & ink. Every panel is opaque so text always sits on a flat
-     ground; only the top bar is left bare, to run into the background. */
+  /* Palette */
   --bg: #ffffff;
   --surface: #ffffff;
   --surface-sunken: #f7f6f2;
@@ -18,33 +23,49 @@
   --hairline: #ecebe6;
   --hairline-strong: #dbd8d1;
 
-  /* Semantic */
+  /* Done — the one semantic colour */
   --go: #17a94b;
   --go-soft: #e6f6ec;
 
-  /* Produce accents, used by the drifting background shapes */
+  /* Extra produce tones, only used by the background drawings */
   --carrot: #ff8a3d;
   --lemon: #ffc633;
   --teal: #12a89b;
-  --radish: #ff5d8f;
 
-  /* Type */
+  /* Type: Outfit for display, Plus Jakarta Sans for everything else */
   --font-display: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-sans:
     'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  /* Rhythm. Every corner is a right angle — nothing in the UI is rounded. */
-  --radius-xs: 0;
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-pill: 0;
-  --gutter: clamp(1.1rem, 4vw, 2.5rem);
+  --text-xs: 0.75rem; /* 12 — hints, counts, small labels */
+  --text-sm: 0.875rem; /* 14 — secondary copy, tips, buttons */
+  --text-md: 1rem; /* 16 — body, food names */
+  --text-lg: 1.25rem; /* 20 — meal names, brand */
+  --text-display: clamp(2.25rem, 6vw, 2.875rem); /* 36–46 — day title */
+
+  /* Space: a 4px grid */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Controls: one size for every square control and marker */
+  --control: 2.25rem;
+  /* Rules: panels 1px, small form marks 1.5px, rails 2px */
+  --rule: 1px;
+  --rule-mark: 1.5px;
+  --rule-rail: 2px;
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
   --wrap: 1160px;
   --column: 760px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.42, 0.5, 1);
+  --fast: 160ms;
 }
 
 [data-slot='breakfast'] {

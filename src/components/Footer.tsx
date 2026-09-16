@@ -6,9 +6,7 @@ export function Footer({ locale }: { locale: LocaleCode }) {
   return (
     <footer className="footer">
       <div className="wrap footer__inner">
-        <p>
-          <strong>Mealy</strong> — {ui.footerNote[locale]}
-        </p>
+        <p>{ui.footerNote[locale]}</p>
 
         <a
           className="footer__link"

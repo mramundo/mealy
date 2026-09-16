@@ -99,7 +99,7 @@ export function CheckIcon(props: IconProps) {
 
 export function ChevronIcon({ dir = 'right', ...props }: IconProps & { dir?: 'left' | 'right' }) {
   return (
-    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
         d={dir === 'left' ? 'M14.5 5.5 8 12l6.5 6.5' : 'M9.5 5.5 16 12l-6.5 6.5'}
         fill="none"
@@ -151,7 +151,7 @@ export function GitHubIcon(props: IconProps) {
 
 export function DownloadIcon(props: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <g {...line} strokeWidth={2.2}>
         <path d="M12 3.5v10.5M7.8 10 12 14.2 16.2 10M4.8 20h14.4" />
       </g>

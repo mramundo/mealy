@@ -2,33 +2,32 @@
 export const ACCENTS = ['#f59300', '#17a94b', '#e8412e', '#de2a7e', '#6b4ae3'] as const
 
 /*
- * A square plate: four mitred sides, one per meal of the day, around a fifth
- * in the middle. Every edge is a right angle and the four sides are identical,
- * so the mark sits square at any size.
+ * A square ring in five pieces, one per meal, running clockwise from the top.
+ *
+ * Five equal pieces cannot share four sides without a cut landing a few units
+ * from a corner — closer than half the ring's width, which leaves a step. So
+ * every cut here is horizontal or vertical and sits well clear of the corners:
+ * the top between the two uprights, the uprights down to the same height, and
+ * the bottom split in the middle into two L-shapes. The pieces meet edge to
+ * edge with no gaps, and the mark is symmetric left to right.
+ *
+ * All coordinates are multiples of 4, so at 16, 32 and 64px every edge lands
+ * on a whole pixel.
  */
-const OUT = 6
-const FAR = 58
-const THICK = 13
-const IN = OUT + THICK
-const NEAR = FAR - THICK
-
-const SIDES = [
-  `${OUT},${OUT} ${FAR},${OUT} ${NEAR},${IN} ${IN},${IN}`, // top
-  `${FAR},${OUT} ${FAR},${FAR} ${NEAR},${NEAR} ${NEAR},${IN}`, // right
-  `${FAR},${FAR} ${OUT},${FAR} ${IN},${NEAR} ${NEAR},${NEAR}`, // bottom
-  `${OUT},${FAR} ${OUT},${OUT} ${IN},${IN} ${IN},${NEAR}`, // left
-]
-
-const CORE = 16
-const CORE_POS = (64 - CORE) / 2
+export const MARK_PIECES = [
+  '16,4 48,4 48,16 16,16', // top — breakfast
+  '48,4 60,4 60,40 48,40', // right — morning snack
+  '48,40 60,40 60,60 32,60 32,48 48,48', // bottom right — lunch
+  '32,48 32,60 4,60 4,40 16,40 16,48', // bottom left — afternoon snack
+  '4,4 16,4 16,40 4,40', // left — dinner
+] as const
 
 export function BrandMark() {
   return (
-    <svg className="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-      {SIDES.map((points, index) => (
+    <svg className="brand__mark" viewBox="0 0 64 64" shapeRendering="crispEdges" aria-hidden="true">
+      {MARK_PIECES.map((points, index) => (
         <polygon key={points} points={points} fill={ACCENTS[index]} />
       ))}
-      <rect x={CORE_POS} y={CORE_POS} width={CORE} height={CORE} fill={ACCENTS[4]} />
     </svg>
   )
 }
