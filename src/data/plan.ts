@@ -4,7 +4,12 @@ const t = (it: string, en: string): Localized => ({ it, en })
 
 /* Ingredients that recur across the week — declared once, reused below. */
 
-const fruit = { qty: '120 g', name: t('Uva', 'Grapes') }
+const fruit = {
+  qty: '150 g',
+  name: t('Frutta fresca', 'Fresh fruit'),
+  hint: t('1 frutto grande o 2 piccoli', '1 large or 2 small pieces'),
+  alternatives: [{ qty: '120 g', name: t('Uva', 'Grapes') }],
+}
 
 const nuts30 = { qty: '30 g', name: t('Frutta secca', 'Nuts') }
 
