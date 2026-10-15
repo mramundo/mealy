@@ -4,11 +4,7 @@ const t = (it: string, en: string): Localized => ({ it, en })
 
 /* Ingredients that recur across the week — declared once, reused below. */
 
-const fruit = {
-  qty: '150 g',
-  name: t('Frutta fresca', 'Fresh fruit'),
-  hint: t('1 frutto grande o 2 piccoli', '1 large or 2 small pieces'),
-}
+const fruit = { qty: '120 g', name: t('Uva', 'Grapes') }
 
 const nuts30 = { qty: '30 g', name: t('Frutta secca', 'Nuts') }
 
@@ -43,12 +39,6 @@ const vegOrSalad70 = {
   ...veg200,
   hint: t('Quantità minima', 'Minimum amount'),
   alternatives: [{ qty: '70 g', name: t('Insalata', 'Salad'), hint: t('Una ciotola', 'One bowl') }],
-}
-
-const proteinScoop = {
-  qty: '30 g',
-  name: t('Proteine whey isolate', 'Whey isolate protein'),
-  hint: t('1 misurino', '1 scoop'),
 }
 
 const vanillaPot = {
@@ -154,15 +144,7 @@ export const plan: Day[] = [
           t('Chiudi con la frutta.', 'Finish with the fruit.'),
         ],
       },
-      afternoonSnack: {
-        items: [proteinScoop],
-        tips: [
-          t(
-            'Sciogli il misurino in acqua o in una bevanda vegetale.',
-            'Dissolve the scoop in water or a plant drink.',
-          ),
-        ],
-      },
+      afternoonSnack: { items: [vanillaPot] },
       dinner: {
         items: [
           {
@@ -190,7 +172,10 @@ export const plan: Day[] = [
           {
             qty: '100 g',
             name: t('Primo sale', 'Primo sale cheese'),
-            alternatives: [{ qty: '100 g', name: t('Scamorza', 'Scamorza cheese') }],
+            alternatives: [
+              { qty: '100 g', name: t('Scamorza', 'Scamorza cheese') },
+              { qty: '180 g', name: t('Ricotta', 'Ricotta') },
+            ],
           },
           {
             qty: '40 g',
@@ -249,7 +234,7 @@ export const plan: Day[] = [
           oil2,
         ],
       },
-      afternoonSnack: { items: [proteinScoop] },
+      afternoonSnack: { items: [vanillaPot] },
       dinner: {
         items: [
           {
@@ -315,7 +300,7 @@ export const plan: Day[] = [
           fruit,
         ],
       },
-      afternoonSnack: { items: [proteinScoop] },
+      afternoonSnack: { items: [vanillaPot] },
       dinner: {
         items: [],
         free: true,
@@ -333,10 +318,7 @@ export const plan: Day[] = [
     id: 'sun',
     meals: {
       breakfast: { items: [fruit, nuts30] },
-      morningSnack: {
-        items: [proteinScoop],
-        tips: [t('Bevilo come frullato.', 'Drink it as a shake.')],
-      },
+      morningSnack: { items: [vanillaPot] },
       lunch: {
         items: [
           { qty: '120 g', name: t('Pasta di semola integrale', 'Wholewheat durum pasta') },
